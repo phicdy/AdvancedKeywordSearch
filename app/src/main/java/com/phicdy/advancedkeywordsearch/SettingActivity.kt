@@ -8,6 +8,7 @@ import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.net.Uri
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import kotlinx.android.synthetic.main.activity_setting.*
@@ -45,6 +46,20 @@ class SettingActivity : AppCompatActivity() {
                 }
 
             })
+
+            setOnQueryTextFocusChangeListener { view, hasFocus ->
+                if (!hasFocus) {
+                    if (query.isEmpty()) {
+                        // Close SearchView
+                        isIconified = true
+                    } else {
+                        // Not close SearchView, hide the keyboard
+                        val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as
+                                InputMethodManager
+                        imm.hideSoftInputFromWindow(view.windowToken, 0)
+                    }
+                }
+            }
         }
 
         return true
