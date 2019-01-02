@@ -3,6 +3,6 @@
 <item android:id="@+id/search"
       android:title="@string/search_hint"
       android:icon="@drawable/ic_search_black"
-      app:actionViewClass="android.widget.SearchView"
+      app:actionViewClass="androidx.appcompat.widget.SearchView"
       app:showAsAction="always"/>
 </menu>

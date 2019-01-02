@@ -5,11 +5,11 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.os.Bundle
 import android.view.Menu
-import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import kotlinx.android.synthetic.main.activity_setting.*
 
 
