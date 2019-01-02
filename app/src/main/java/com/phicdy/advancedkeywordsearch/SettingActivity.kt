@@ -19,51 +19,56 @@ class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(bottomAppBar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_setting, menu)
 
-        val searchMenuItem = menu.findItem(R.id.search)
-        (searchMenuItem.actionView as SearchView).apply {
+        bottomAppBar.setOnMenuItemClickListener { menuItem ->
+            (menuItem.actionView as SearchView).apply {
+                val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+                setSearchableInfo(searchManager.getSearchableInfo(componentName))
 
-            val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-            setSearchableInfo(searchManager.getSearchableInfo(componentName))
-
-            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    clearFocus()
-                    try {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=$query"))
-                        startActivity(intent)
-                    } catch (e: ActivityNotFoundException) {
-                        Toast.makeText(this@SettingActivity, getString(R.string.error_activity_not_found), Toast.LENGTH_SHORT).show()
+                setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        clearFocus()
+                        try {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=$query"))
+                            startActivity(intent)
+                        } catch (e: ActivityNotFoundException) {
+                            Toast.makeText(
+                                this@SettingActivity,
+                                getString(R.string.error_activity_not_found),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        return true // Handled the event in the listener, not handle in default SearchView
                     }
-                    return true // Handled the event in the listener, not handle in default SearchView
-                }
 
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    return true // Handled the event in the listener, not handle in default SearchView
-                }
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        return true // Handled the event in the listener, not handle in default SearchView
+                    }
 
-            })
+                })
 
-            setOnQueryTextFocusChangeListener { view, hasFocus ->
-                if (!hasFocus) {
-                    if (query.isEmpty()) {
-                        // Close SearchView
-                        searchMenuItem.collapseActionView()
-                    } else {
-                        // Not close SearchView, hide the keyboard
-                        val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as
-                                InputMethodManager
-                        imm.hideSoftInputFromWindow(view.windowToken, 0)
+                setOnQueryTextFocusChangeListener { view, hasFocus ->
+                    if (!hasFocus) {
+                        if (query.isEmpty()) {
+                            // Close SearchView
+                            menuItem.collapseActionView()
+                        } else {
+                            // Not close SearchView, hide the keyboard
+                            val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as
+                                    InputMethodManager
+                            imm.hideSoftInputFromWindow(view.windowToken, 0)
+                        }
                     }
                 }
             }
-        }
 
+            return@setOnMenuItemClickListener true
+        }
         return true
     }
 }
