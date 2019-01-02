@@ -25,7 +25,9 @@ class SettingActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_setting, menu)
 
-        (menu.findItem(R.id.search).actionView as SearchView).apply {
+        val searchMenuItem = menu.findItem(R.id.search)
+        (searchMenuItem.actionView as SearchView).apply {
+
             val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
 
@@ -51,7 +53,7 @@ class SettingActivity : AppCompatActivity() {
                 if (!hasFocus) {
                     if (query.isEmpty()) {
                         // Close SearchView
-                        isIconified = true
+                        searchMenuItem.collapseActionView()
                     } else {
                         // Not close SearchView, hide the keyboard
                         val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as
