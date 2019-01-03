@@ -23,6 +23,8 @@ class SettingActivity : AppCompatActivity() {
 
     private fun initSearchView() {
         searchView.apply {
+            requestFocus()
+
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     clearFocus()
