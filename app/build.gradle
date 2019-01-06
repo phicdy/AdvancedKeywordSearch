@@ -39,6 +39,10 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
 
+    def coroutineVer = '1.1.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVer"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVer"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
