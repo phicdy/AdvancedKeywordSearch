@@ -35,7 +35,8 @@ kapt {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':data:repository')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
     implementation 'com.google.android.material:material:1.1.0-alpha02'
