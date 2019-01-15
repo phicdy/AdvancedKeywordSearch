@@ -1,3 +1,4 @@
 include ':app',
         ':model',
+        ':data:preferences',
         ':data:repository'
