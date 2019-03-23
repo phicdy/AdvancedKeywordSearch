@@ -28,6 +28,3 @@ interface AppComponent : AndroidInjector<AdvancedKeyWordSearchApplication> {
     override fun inject(app: AdvancedKeyWordSearchApplication)
 }
 
-fun Application.createAppComponent() = DaggerAppComponent.builder()
-    .application(this)
-    .build()
