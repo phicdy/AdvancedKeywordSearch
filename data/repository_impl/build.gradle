@@ -37,7 +37,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVer"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVer"
 
-    def daggerVer = '2.20'
     implementation "com.google.dagger:dagger:$daggerVer"
     kapt "com.google.dagger:dagger-compiler:$daggerVer"
     testImplementation 'junit:junit:4.12'
