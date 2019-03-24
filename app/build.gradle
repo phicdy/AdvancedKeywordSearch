@@ -35,7 +35,9 @@ kapt {
 }
 
 dependencies {
+    implementation project(':data:preferences')
     implementation project(':data:repository')
+    implementation project(':data:repository_impl')
     implementation project(':model')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
