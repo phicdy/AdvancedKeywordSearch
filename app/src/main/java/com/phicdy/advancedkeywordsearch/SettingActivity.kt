@@ -8,10 +8,11 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.phicdy.advancedkeywordsearch.databinding.ActivitySettingBinding
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -29,6 +30,9 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
+    private val binding: ActivitySettingBinding by lazy {
+        DataBindingUtil.setContentView<ActivitySettingBinding>(this, R.layout.activity_setting)
+    }
 
     private val settingViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(SettingViewModel::class.java)
@@ -36,8 +40,8 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setting)
-        setSupportActionBar(bottomAppBar)
+
+        setSupportActionBar(binding.bottomAppBar)
         initSearchView()
         launch {
             settingViewModel.init()
@@ -45,7 +49,7 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
     }
 
     private fun initSearchView() {
-        searchView.apply {
+        binding.searchView.apply {
             requestFocus()
 
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
