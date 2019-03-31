@@ -9,6 +9,6 @@ import javax.inject.Inject
 
 class DataSettingRepository @Inject constructor(val preferences: SettingPreferences) : SettingRepository {
     override suspend fun fetch(): SearchSetting = withContext(Dispatchers.IO) {
-        return@withContext SearchSetting(preferences.excludedWordings())
+        return@withContext SearchSetting("title", preferences.excludedWordings())
     }
 }

@@ -9,8 +9,10 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.phicdy.advancedkeywordsearch.databinding.ActivitySettingBinding
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.coroutines.CoroutineScope
@@ -38,13 +40,26 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
         ViewModelProviders.of(this, viewModelFactory).get(SettingViewModel::class.java)
     }
 
+    private val adapter = SettingListAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setSupportActionBar(binding.bottomAppBar)
+        initRecyclerView()
         initSearchView()
+        settingViewModel.searchSetting.observe(this, Observer {
+            adapter.add(listOf(it))
+        })
         launch {
             settingViewModel.init()
+        }
+    }
+
+    private fun initRecyclerView() {
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(this@SettingActivity)
+            adapter = this@SettingActivity.adapter
         }
     }
 
@@ -56,7 +71,10 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     clearFocus()
                     try {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=$query"))
+                        val intent = Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("https://www.google.com/search?q=$query+-いかがでしたか&tbs=qdr:y")
+                        )
                         startActivity(intent)
                     } catch (e: ActivityNotFoundException) {
                         Toast.makeText(
