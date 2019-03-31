@@ -1,5 +1,6 @@
 include ':app',
         ':model',
+        ':data:db_room',
         ':data:preferences',
         ':data:repository',
         ':data:repository_impl'
