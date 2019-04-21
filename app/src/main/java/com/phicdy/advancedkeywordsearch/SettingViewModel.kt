@@ -18,7 +18,8 @@ class SettingViewModel @Inject constructor(
 
     suspend fun init() = coroutineScope {
         val setting = settingRepository.fetch()
-        _searchSettings.postValue(setting)
+        if (setting.isEmpty()) return@coroutineScope
+        _searchSettings.postValue(setting[0].setting)
     }
 
 }

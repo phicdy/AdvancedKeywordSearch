@@ -13,6 +13,7 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         SettingModule::class,
         RepositoryComponentModule::class,
+        RoomDatabaseComponentModule::class,
         PreferencesComponentModule::class
     ]
 )

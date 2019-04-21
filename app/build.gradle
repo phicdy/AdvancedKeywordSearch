@@ -38,6 +38,8 @@ kapt {
 }
 
 dependencies {
+    implementation project(':data:db')
+    implementation project(':data:db_room')
     implementation project(':data:preferences')
     implementation project(':data:repository')
     implementation project(':data:repository_impl')

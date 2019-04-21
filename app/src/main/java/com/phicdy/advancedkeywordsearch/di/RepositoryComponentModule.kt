@@ -1,6 +1,7 @@
 package com.phicdy.advancedkeywordsearch.di
 
 import com.phicdy.advancedkeywordsearch.data.repository.RepositoryComponent
+import com.phicdy.advancedkeywordsearch.db.SearchSettingDatabase
 import com.phicdy.advancedkeywordsearch.preferences.SettingPreferences
 import com.phicdy.advancedkeywordsearch.repository.SettingRepository
 import dagger.Module
@@ -22,10 +23,12 @@ object RepositoryComponentModule {
     @Provides
     @Singleton
     fun provideRepositoryComponent(
-        preferences: SettingPreferences
+        preferences: SettingPreferences,
+        database: SearchSettingDatabase
     ): RepositoryComponent {
         return RepositoryComponent.builder()
-            .settingDatabase(preferences)
+            .settingPreferences(preferences)
+            .settingDatabase(database)
             .build()
     }
 }
