@@ -1,6 +1,10 @@
 package com.phicdy.advancedkeywordsearch.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "search_setting")
 data class SearchSetting(
-    val title: String,
-    val excludedKeywords: List<String>
+    @PrimaryKey val id: Int,
+    val title: String
 )
