@@ -24,6 +24,9 @@ android {
 }
 
 dependencies {
+    implementation project(':model')
+    implementation project(':data:db')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVer"
