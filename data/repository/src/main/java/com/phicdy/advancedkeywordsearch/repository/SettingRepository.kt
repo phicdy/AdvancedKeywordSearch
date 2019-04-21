@@ -1,8 +1,8 @@
 package com.phicdy.advancedkeywordsearch.repository
 
-import com.phicdy.advancedkeywordsearch.model.SearchSetting
+import com.phicdy.advancedkeywordsearch.model.SearchSettingAndKeywords
 
 interface SettingRepository {
 
-    suspend fun fetch(): SearchSetting
+    suspend fun fetch(): List<SearchSettingAndKeywords>
 }

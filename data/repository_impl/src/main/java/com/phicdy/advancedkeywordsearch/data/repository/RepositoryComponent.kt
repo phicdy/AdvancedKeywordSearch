@@ -1,5 +1,6 @@
 package com.phicdy.advancedkeywordsearch.data.repository
 
+import com.phicdy.advancedkeywordsearch.db.SearchSettingDatabase
 import com.phicdy.advancedkeywordsearch.preferences.SettingPreferences
 import com.phicdy.advancedkeywordsearch.repository.SettingRepository
 import dagger.BindsInstance
@@ -18,7 +19,10 @@ interface RepositoryComponent {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun settingDatabase(preferences: SettingPreferences): Builder
+        fun settingPreferences(preferences: SettingPreferences): Builder
+
+        @BindsInstance
+        fun settingDatabase(database: SearchSettingDatabase): Builder
 
         fun build(): RepositoryComponent
     }
