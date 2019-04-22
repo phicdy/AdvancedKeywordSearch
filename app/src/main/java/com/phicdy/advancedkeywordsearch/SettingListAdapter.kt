@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.phicdy.advancedkeywordsearch.databinding.ItemSearchSettingBinding
-import com.phicdy.advancedkeywordsearch.model.SearchSetting
+import com.phicdy.advancedkeywordsearch.model.SearchSettingAndKeywords
 
 class SettingListAdapter : RecyclerView.Adapter<SettingListAdapter.SearchSettingViewHolder>() {
 
-    private val items = mutableListOf<SearchSetting>()
+    private val items = mutableListOf<SearchSettingAndKeywords>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchSettingViewHolder {
         val listItemBinding = ItemSearchSettingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -18,10 +18,10 @@ class SettingListAdapter : RecyclerView.Adapter<SettingListAdapter.SearchSetting
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: SearchSettingViewHolder, position: Int) {
-        holder.binding.title.text = items[position].title
+        holder.binding.title.text = items[position].setting.title
     }
 
-    fun add(searchSettings: List<SearchSetting>) {
+    fun add(searchSettings: List<SearchSettingAndKeywords>) {
         items.addAll(searchSettings)
         notifyDataSetChanged()
     }

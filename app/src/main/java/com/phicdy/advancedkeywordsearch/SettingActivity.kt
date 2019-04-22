@@ -49,7 +49,7 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
         initRecyclerView()
         initSearchView()
         settingViewModel.searchSetting.observe(this, Observer {
-            adapter.add(listOf(it))
+            adapter.add(it)
         })
         launch {
             settingViewModel.init()
