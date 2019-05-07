@@ -4,26 +4,34 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".SettingActivity">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SettingActivity">
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <com.google.android.material.bottomappbar.BottomAppBar
-                android:id="@+id/bottomAppBar"
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fabAlignmentMode="end"
+            android:layout_gravity="bottom">
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom">
-            <androidx.appcompat.widget.SearchView
-                    android:id="@+id/searchView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:iconifiedByDefault="false"
-                    app:queryHint="@string/search_hint"/>
+                app:iconifiedByDefault="false"
+                app:queryHint="@string/search_hint"/>
         </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            app:layout_anchor="@id/bottomAppBar"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
