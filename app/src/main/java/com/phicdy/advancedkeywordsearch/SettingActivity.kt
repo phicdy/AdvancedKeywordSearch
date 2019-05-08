@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.phicdy.advancedkeywordsearch.databinding.ActivitySettingBinding
+import com.phicdy.advancedkeywordsearch.ui.addsetting.AddSettingActivity
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -48,6 +49,7 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
         setSupportActionBar(binding.bottomAppBar)
         initRecyclerView()
         initSearchView()
+        initFab()
         settingViewModel.searchSetting.observe(this, Observer {
             adapter.add(it)
         })
@@ -102,4 +104,11 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
             }
         }
     }
+
+    private fun initFab() {
+        binding.fab.setOnClickListener {
+            startActivity(Intent(this, AddSettingActivity::class.java))
+        }
+    }
+
 }
