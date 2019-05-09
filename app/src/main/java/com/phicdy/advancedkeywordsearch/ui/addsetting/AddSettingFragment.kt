@@ -13,9 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.phicdy.advancedkeywordsearch.R
 import com.phicdy.advancedkeywordsearch.databinding.AddSettingFragmentBinding
 import dagger.android.support.DaggerFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class AddSettingFragment : DaggerFragment() {
+class AddSettingFragment : DaggerFragment(), CoroutineScope {
 
     companion object {
         fun newInstance() = AddSettingFragment()
@@ -23,6 +28,10 @@ class AddSettingFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val job = Job()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     private val viewModel: AddSettingViewModel by lazy {
         ViewModelProviders.of(this, viewModelFactory).get(AddSettingViewModel::class.java)
