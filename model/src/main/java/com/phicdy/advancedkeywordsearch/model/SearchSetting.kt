@@ -5,6 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "search_setting")
 data class SearchSetting(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) var id: Long = 0,
     val title: String
 )

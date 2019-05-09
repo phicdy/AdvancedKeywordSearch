@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey
     ]
 )
 class ExcludedKeyword(
-    @PrimaryKey val id: Int,
-    @ColumnInfo(name = "setting_id") val settingId: Int,
+    @PrimaryKey(autoGenerate = true) var id: Long = 0,
+    @ColumnInfo(name = "setting_id") val settingId: Long = 0,
     val keyword: String
 )
