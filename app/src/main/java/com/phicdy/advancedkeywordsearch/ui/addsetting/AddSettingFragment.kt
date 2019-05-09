@@ -50,6 +50,9 @@ class AddSettingFragment : DaggerFragment() {
 
             return@setOnEditorActionListener false
         }
+        binding.storeButton.setOnClickListener {
+        }
+
         initRecyclerView()
 
     }
