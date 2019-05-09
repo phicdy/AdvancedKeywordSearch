@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.phicdy.advancedkeywordsearch.R
 import com.phicdy.advancedkeywordsearch.databinding.AddSettingFragmentBinding
+import com.phicdy.advancedkeywordsearch.model.ExcludedKeyword
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -60,6 +61,12 @@ class AddSettingFragment : DaggerFragment(), CoroutineScope {
             return@setOnEditorActionListener false
         }
         binding.storeButton.setOnClickListener {
+            launch {
+                viewModel.store(
+                    title = binding.inputTitle.text.toString(),
+                    keywords = adapter.items.map { ExcludedKeyword(keyword = it) }
+                )
+            }
         }
 
         initRecyclerView()

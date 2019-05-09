@@ -7,7 +7,7 @@ import com.phicdy.advancedkeywordsearch.databinding.ItemSearchSettingBinding
 
 class ExcludeKeywordListAdapter : RecyclerView.Adapter<ExcludeKeywordListAdapter.ExcludeKeywordViewHolder>() {
 
-    private val items = mutableListOf<String>()
+    val items = mutableListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExcludeKeywordViewHolder {
         val listItemBinding = ItemSearchSettingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
