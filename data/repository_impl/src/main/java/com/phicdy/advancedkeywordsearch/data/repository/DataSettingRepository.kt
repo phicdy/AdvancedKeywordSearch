@@ -1,6 +1,7 @@
 package com.phicdy.advancedkeywordsearch.data.repository
 
 import com.phicdy.advancedkeywordsearch.db.SearchSettingDatabase
+import com.phicdy.advancedkeywordsearch.model.ExcludedKeyword
 import com.phicdy.advancedkeywordsearch.model.SearchSettingAndKeywords
 import com.phicdy.advancedkeywordsearch.preferences.SettingPreferences
 import com.phicdy.advancedkeywordsearch.repository.SettingRepository
@@ -12,7 +13,13 @@ class DataSettingRepository @Inject constructor(
     val preferences: SettingPreferences,
     val database: SearchSettingDatabase
 ) : SettingRepository {
+
     override suspend fun fetch(): List<SearchSettingAndKeywords> = withContext(Dispatchers.IO) {
         return@withContext database.settings()
     }
+
+    override suspend fun store(title: String, keywords: List<ExcludedKeyword>) = withContext(Dispatchers.IO) {
+        database.store(title, keywords)
+    }
+
 }
