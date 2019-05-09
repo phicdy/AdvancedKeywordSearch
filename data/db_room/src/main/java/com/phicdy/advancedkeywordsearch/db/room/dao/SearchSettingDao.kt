@@ -13,7 +13,7 @@ import com.phicdy.advancedkeywordsearch.model.SearchSettingAndKeywords
 interface SearchSettingDao {
 
     @Insert
-    fun insertSetting(vararg settings: SearchSetting)
+    fun insertSetting(setting: SearchSetting): Long
 
     @Insert
     fun insertKeyword(vararg keywords: ExcludedKeyword)
