@@ -7,19 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.phicdy.advancedkeywordsearch.R
 import com.phicdy.advancedkeywordsearch.databinding.AddSettingFragmentBinding
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class AddSettingFragment : Fragment() {
+class AddSettingFragment : DaggerFragment() {
 
     companion object {
         fun newInstance() = AddSettingFragment()
     }
 
-    private lateinit var viewModel: AddSettingViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel: AddSettingViewModel by lazy {
+        ViewModelProviders.of(this, viewModelFactory).get(AddSettingViewModel::class.java)
+    }
     private val adapter = ExcludeKeywordListAdapter()
 
     private val binding: AddSettingFragmentBinding by lazy {
@@ -35,8 +42,6 @@ class AddSettingFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AddSettingViewModel::class.java)
-        // TODO: Use the ViewModel
         binding.inputKeyword.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE && event?.action != KeyEvent.ACTION_UP) {
                 adapter.add(v.text.toString())
