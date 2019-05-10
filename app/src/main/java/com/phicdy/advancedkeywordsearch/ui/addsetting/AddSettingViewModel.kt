@@ -7,7 +7,7 @@ import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
 
 class AddSettingViewModel @Inject constructor(
-    val settingRepository: SettingRepository
+    private val settingRepository: SettingRepository
 ) : ViewModel() {
 
     suspend fun store(title: String, keywords: List<ExcludedKeyword>) = coroutineScope {
