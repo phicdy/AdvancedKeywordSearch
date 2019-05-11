@@ -50,8 +50,12 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
         initRecyclerView()
         initSearchView()
         initFab()
+    }
+
+    override fun onStart() {
+        super.onStart()
         settingViewModel.searchSetting.observe(this, Observer {
-            adapter.add(it)
+            adapter.set(it)
         })
         launch {
             settingViewModel.init()

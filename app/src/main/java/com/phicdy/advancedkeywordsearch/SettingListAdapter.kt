@@ -21,7 +21,8 @@ class SettingListAdapter : RecyclerView.Adapter<SettingListAdapter.SearchSetting
         holder.binding.title.text = items[position].setting.title
     }
 
-    fun add(searchSettings: List<SearchSettingAndKeywords>) {
+    fun set(searchSettings: List<SearchSettingAndKeywords>) {
+        items.clear()
         items.addAll(searchSettings)
         notifyDataSetChanged()
     }
