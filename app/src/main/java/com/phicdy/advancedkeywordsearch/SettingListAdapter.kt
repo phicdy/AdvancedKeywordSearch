@@ -5,8 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.phicdy.advancedkeywordsearch.databinding.ItemSearchSettingBinding
 import com.phicdy.advancedkeywordsearch.model.SearchSettingAndKeywords
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
-class SettingListAdapter : RecyclerView.Adapter<SettingListAdapter.SearchSettingViewHolder>() {
+class SettingListAdapter(
+    private val settingViewModel: SettingViewModel,
+    private val coroutineScope: CoroutineScope
+) : RecyclerView.Adapter<SettingListAdapter.SearchSettingViewHolder>() {
 
     private val items = mutableListOf<SearchSettingAndKeywords>()
 
@@ -18,7 +23,14 @@ class SettingListAdapter : RecyclerView.Adapter<SettingListAdapter.SearchSetting
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: SearchSettingViewHolder, position: Int) {
-        holder.binding.title.text = items[position].setting.title
+        val setting = items[position].setting
+        holder.binding.title.text = setting.title
+        holder.binding.switchEnabled.apply {
+            isChecked = setting.defaultEnabled
+            setOnCheckedChangeListener { _, isChecked ->
+                coroutineScope.launch { settingViewModel.update(setting.copy(setting.id, setting.title, isChecked)) }
+            }
+        }
     }
 
     fun set(searchSettings: List<SearchSettingAndKeywords>) {

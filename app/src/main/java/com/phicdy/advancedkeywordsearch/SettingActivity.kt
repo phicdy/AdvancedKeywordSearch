@@ -41,7 +41,9 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
         ViewModelProviders.of(this, viewModelFactory).get(SettingViewModel::class.java)
     }
 
-    private val adapter = SettingListAdapter()
+    private val adapter by lazy {
+        SettingListAdapter(settingViewModel, this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
