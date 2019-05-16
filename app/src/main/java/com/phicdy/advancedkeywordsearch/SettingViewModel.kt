@@ -3,6 +3,7 @@ package com.phicdy.advancedkeywordsearch
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.phicdy.advancedkeywordsearch.model.SearchSetting
 import com.phicdy.advancedkeywordsearch.model.SearchSettingAndKeywords
 import com.phicdy.advancedkeywordsearch.repository.SettingRepository
 import kotlinx.coroutines.coroutineScope
@@ -22,4 +23,7 @@ class SettingViewModel @Inject constructor(
         _searchSettings.postValue(setting)
     }
 
+    suspend fun update(setting: SearchSetting) = coroutineScope {
+        settingRepository.update(setting)
+    }
 }

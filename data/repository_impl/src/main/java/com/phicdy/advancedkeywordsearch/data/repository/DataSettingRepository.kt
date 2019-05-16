@@ -2,6 +2,7 @@ package com.phicdy.advancedkeywordsearch.data.repository
 
 import com.phicdy.advancedkeywordsearch.db.SearchSettingDatabase
 import com.phicdy.advancedkeywordsearch.model.ExcludedKeyword
+import com.phicdy.advancedkeywordsearch.model.SearchSetting
 import com.phicdy.advancedkeywordsearch.model.SearchSettingAndKeywords
 import com.phicdy.advancedkeywordsearch.preferences.SettingPreferences
 import com.phicdy.advancedkeywordsearch.repository.SettingRepository
@@ -22,4 +23,7 @@ class DataSettingRepository @Inject constructor(
         database.store(title, keywords)
     }
 
+    override suspend fun update(setting: SearchSetting) = withContext(Dispatchers.IO) {
+        database.update(setting)
+    }
 }

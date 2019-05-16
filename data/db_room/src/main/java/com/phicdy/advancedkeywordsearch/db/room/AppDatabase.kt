@@ -22,4 +22,8 @@ class AppDatabase @Inject constructor(
         val insertKeywords = keywords.map { ExcludedKeyword(it.id, id, it.keyword) }
         database.searchSettingDao().insertKeyword(*insertKeywords.toTypedArray())
     }
+
+    override fun update(setting: SearchSetting) {
+        database.searchSettingDao().updateSetting(setting)
+    }
 }
