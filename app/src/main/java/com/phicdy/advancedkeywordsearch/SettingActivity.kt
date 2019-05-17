@@ -57,7 +57,7 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
     override fun onStart() {
         super.onStart()
         settingViewModel.searchSetting.observe(this, Observer {
-            adapter.set(it)
+            adapter.submitList(it)
         })
         launch {
             settingViewModel.init()
