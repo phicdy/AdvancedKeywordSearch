@@ -3,6 +3,7 @@ buildscript {
     ext.daggerVer = '2.21'
     ext.coroutineVer = '1.1.1'
     ext.room_version = "2.1.0-alpha06"
+    ext.lifecycle_version = "2.1.0-beta01"
 
     repositories {
         google()
