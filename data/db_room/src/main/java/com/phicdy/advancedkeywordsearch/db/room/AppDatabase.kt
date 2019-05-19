@@ -1,5 +1,6 @@
 package com.phicdy.advancedkeywordsearch.db.room
 
+import androidx.lifecycle.LiveData
 import com.phicdy.advancedkeywordsearch.db.SearchSettingDatabase
 import com.phicdy.advancedkeywordsearch.model.ExcludedKeyword
 import com.phicdy.advancedkeywordsearch.model.SearchSetting
@@ -13,7 +14,7 @@ class AppDatabase @Inject constructor(
     val database: AppRoomDatabase
 ) : SearchSettingDatabase {
 
-    override fun settings(): List<SearchSettingAndKeywords> {
+    override fun settings(): LiveData<List<SearchSettingAndKeywords>> {
         return database.searchSettingDao().loadSettingAndKeyword()
     }
 

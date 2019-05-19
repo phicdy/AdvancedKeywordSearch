@@ -1,5 +1,6 @@
 package com.phicdy.advancedkeywordsearch.db.room.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -27,5 +28,5 @@ interface SearchSettingDao {
 
     @Transaction
     @Query("SELECT * FROM search_setting")
-    fun loadSettingAndKeyword(): List<SearchSettingAndKeywords>
+    fun loadSettingAndKeyword(): LiveData<List<SearchSettingAndKeywords>>
 }

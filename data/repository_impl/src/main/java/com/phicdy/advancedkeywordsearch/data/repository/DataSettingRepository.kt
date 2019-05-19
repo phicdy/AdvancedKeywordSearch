@@ -1,5 +1,6 @@
 package com.phicdy.advancedkeywordsearch.data.repository
 
+import androidx.lifecycle.LiveData
 import com.phicdy.advancedkeywordsearch.db.SearchSettingDatabase
 import com.phicdy.advancedkeywordsearch.model.ExcludedKeyword
 import com.phicdy.advancedkeywordsearch.model.SearchSetting
@@ -15,7 +16,7 @@ class DataSettingRepository @Inject constructor(
     val database: SearchSettingDatabase
 ) : SettingRepository {
 
-    override suspend fun fetch(): List<SearchSettingAndKeywords> = withContext(Dispatchers.IO) {
+    override suspend fun fetch(): LiveData<List<SearchSettingAndKeywords>> = withContext(Dispatchers.IO) {
         return@withContext database.settings()
     }
 

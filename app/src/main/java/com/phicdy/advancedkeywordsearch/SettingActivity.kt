@@ -56,11 +56,10 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
 
     override fun onStart() {
         super.onStart()
-        settingViewModel.searchSetting.observe(this, Observer {
-            adapter.submitList(it)
-        })
         launch {
-            settingViewModel.init()
+            settingViewModel.searchSetting.await().observe(this@SettingActivity, Observer {
+                adapter.submitList(it)
+            })
         }
     }
 
