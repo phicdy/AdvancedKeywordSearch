@@ -55,6 +55,7 @@ class AddSettingFragment : DaggerFragment(), CoroutineScope {
         binding.inputKeyword.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE && event?.action != KeyEvent.ACTION_UP) {
                 adapter.add(v.text.toString())
+                binding.inputKeyword.setText("")
                 return@setOnEditorActionListener true
             }
 
