@@ -1,4 +1,5 @@
 include ':app',
+        ':domain',
         ':model',
         ':data:db',
         ':data:db_room',
