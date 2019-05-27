@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -24,5 +26,10 @@ android {
 }
 
 dependencies {
+    implementation project(':model')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.google.dagger:dagger:$daggerVer"
+    kapt "com.google.dagger:dagger-compiler:$daggerVer"
+
     testImplementation 'junit:junit:4.12'
 }
