@@ -26,7 +26,9 @@ class SettingListAdapter(
         holder.binding.switchEnabled.apply {
             isChecked = setting.defaultEnabled
             setOnCheckedChangeListener { _, isChecked ->
-                coroutineScope.launch { settingViewModel.update(setting.copy(setting.id, setting.title, isChecked)) }
+                coroutineScope.launch {
+                    settingViewModel.update(setting.copy(setting.id, setting.title, isChecked))
+                }
             }
         }
     }
@@ -43,7 +45,16 @@ private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SearchSettingAndKeywo
     }
 
     override fun areContentsTheSame(oldItem: SearchSettingAndKeywords, newItem: SearchSettingAndKeywords): Boolean {
-        return oldItem.setting == newItem.setting && oldItem.keywords == newItem.keywords
+        return oldItem == newItem || isSameExceptDefaultEnabled(oldItem, newItem)
     }
+
+    // When change the value of the switch, the value in the database will be also updated.
+    // If Activity/Fragment is observing the change of database and submit the list, this adapter will be update.
+    // But the switch was already changed, no need to reload the view.
+    // This method skip the reload in that situation by comparing the values except for "defaultEnabled"
+    private fun isSameExceptDefaultEnabled(oldItem: SearchSettingAndKeywords, newItem: SearchSettingAndKeywords) =
+        oldItem.setting.id == newItem.setting.id &&
+                oldItem.setting.title == newItem.setting.title &&
+                oldItem.keywords == newItem.keywords
 
 }
