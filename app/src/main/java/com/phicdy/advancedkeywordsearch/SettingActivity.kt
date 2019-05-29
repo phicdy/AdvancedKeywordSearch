@@ -80,7 +80,11 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
                     try {
                         val intent = Intent(
                             Intent.ACTION_VIEW,
-                            Uri.parse("https://www.google.com/search?q=$query+-いかがでしたか&tbs=qdr:y")
+                            Uri.parse(
+                                "https://www.google.com/search?q=$query" +
+                                        settingViewModel.generateSearchUrlOption(adapter.currentList) +
+                                        "&tbs=qdr:y"
+                            )
                         )
                         startActivity(intent)
                     } catch (e: ActivityNotFoundException) {
