@@ -4,4 +4,11 @@
     <string name="search_hint">検索語句</string>
     <string name="error_activity_not_found">ブラウザが見つかりません</string>
     <string name="excluded_keyword">除外キーワード</string>
+    <string name="period">期間</string>
+    <string name="no_period_limit">期間指定なし</string>
+    <string name="one_hour_or_less">1時間以内</string>
+    <string name="twenty_hour_hours_or_less">24時間以内</string>
+    <string name="one_week_or_less">1週間以内</string>
+    <string name="one_month_or_less">1ヶ月以内</string>
+    <string name="one_year_or_less">1年以内</string>
 </resources>
