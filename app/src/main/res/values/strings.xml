@@ -3,4 +3,5 @@
     <string name="app_label">AdvancedKeywordSearch</string>
     <string name="search_hint">検索語句</string>
     <string name="error_activity_not_found">ブラウザが見つかりません</string>
+    <string name="excluded_keyword">除外キーワード</string>
 </resources>

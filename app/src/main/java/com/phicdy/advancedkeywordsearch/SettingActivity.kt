@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.phicdy.advancedkeywordsearch.databinding.ActivitySettingBinding
 import com.phicdy.advancedkeywordsearch.ui.addsetting.AddSettingActivity
 import dagger.android.support.DaggerAppCompatActivity
@@ -65,7 +66,7 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
 
     private fun initRecyclerView() {
         binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(this@SettingActivity)
+            layoutManager = LinearLayoutManager(this@SettingActivity, RecyclerView.HORIZONTAL, false)
             adapter = this@SettingActivity.adapter
         }
     }

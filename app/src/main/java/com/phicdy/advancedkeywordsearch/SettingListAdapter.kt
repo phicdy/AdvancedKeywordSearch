@@ -2,10 +2,17 @@ package com.phicdy.advancedkeywordsearch
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.flexbox.AlignItems
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.phicdy.advancedkeywordsearch.databinding.ItemExcludedKeywordBinding
 import com.phicdy.advancedkeywordsearch.databinding.ItemSearchSettingBinding
+import com.phicdy.advancedkeywordsearch.model.ExcludedKeyword
 import com.phicdy.advancedkeywordsearch.model.SearchSettingAndKeywords
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -23,14 +30,36 @@ class SettingListAdapter(
     override fun onBindViewHolder(holder: SearchSettingViewHolder, position: Int) {
         val setting = getItem(position).setting
         holder.binding.title.text = setting.title
-        holder.binding.switchEnabled.apply {
-            isChecked = setting.defaultEnabled
-            setOnCheckedChangeListener { _, isChecked ->
+
+        holder.binding.card.apply {
+            strokeColor = ContextCompat.getColor(
+                holder.binding.root.context,
+                if (setting.defaultEnabled) R.color.colorAccent else R.color.default_stroke
+            )
+            setOnClickListener {
                 coroutineScope.launch {
-                    settingViewModel.update(setting.copy(setting.id, setting.title, isChecked))
+                    settingViewModel.update(
+                        setting.copy(
+                            setting.id,
+                            setting.title,
+                            !setting.defaultEnabled
+                        )
+                    )
                 }
             }
         }
+
+        val flexboxLayoutManager = FlexboxLayoutManager(holder.binding.root.context).apply {
+            flexWrap = FlexWrap.WRAP
+            flexDirection = FlexDirection.ROW
+            alignItems = AlignItems.STRETCH
+        }
+        val adapter = KeywordListAdapter()
+        holder.binding.recyclerView.apply {
+            this.adapter = adapter
+            layoutManager = flexboxLayoutManager
+        }
+        adapter.submitList(getItem(position).keywords)
     }
 
     class SearchSettingViewHolder(
@@ -45,16 +74,34 @@ private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SearchSettingAndKeywo
     }
 
     override fun areContentsTheSame(oldItem: SearchSettingAndKeywords, newItem: SearchSettingAndKeywords): Boolean {
-        return oldItem == newItem || isSameExceptDefaultEnabled(oldItem, newItem)
+        return oldItem == newItem
+    }
+}
+
+class KeywordListAdapter : ListAdapter<ExcludedKeyword, KeywordListAdapter.KeywordViewHolder>(KEYWORD_DIFF_CALLBACK) {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KeywordViewHolder {
+        val binding = ItemExcludedKeywordBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return KeywordViewHolder(binding)
     }
 
-    // When change the value of the switch, the value in the database will be also updated.
-    // If Activity/Fragment is observing the change of database and submit the list, this adapter will be update.
-    // But the switch was already changed, no need to reload the view.
-    // This method skip the reload in that situation by comparing the values except for "defaultEnabled"
-    private fun isSameExceptDefaultEnabled(oldItem: SearchSettingAndKeywords, newItem: SearchSettingAndKeywords) =
-        oldItem.setting.id == newItem.setting.id &&
-                oldItem.setting.title == newItem.setting.title &&
-                oldItem.keywords == newItem.keywords
+    override fun onBindViewHolder(holder: KeywordViewHolder, position: Int) {
+        holder.binding.keyword.text = getItem(position).keyword
+    }
 
+    class KeywordViewHolder(
+        val binding: ItemExcludedKeywordBinding
+    ) : RecyclerView.ViewHolder(binding.root)
 }
+
+private val KEYWORD_DIFF_CALLBACK = object : DiffUtil.ItemCallback<ExcludedKeyword>() {
+
+    override fun areItemsTheSame(oldItem: ExcludedKeyword, newItem: ExcludedKeyword): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: ExcludedKeyword, newItem: ExcludedKeyword): Boolean {
+        return oldItem == newItem
+    }
+}
+
