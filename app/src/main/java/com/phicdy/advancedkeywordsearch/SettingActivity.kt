@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.phicdy.advancedkeywordsearch.databinding.ActivitySettingBinding
+import com.phicdy.advancedkeywordsearch.domain.entity.Period
 import com.phicdy.advancedkeywordsearch.ui.addsetting.AddSettingActivity
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.coroutines.CoroutineScope
@@ -79,12 +80,20 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     clearFocus()
                     try {
+                        val period = when (binding.rgPeriod.checkedRadioButtonId) {
+                            R.id.rbNoLimit -> Period.NO_LIMIT
+                            R.id.rb1hourOrLess -> Period.ONE_HOUR_OR_LESS
+                            R.id.rb24hoursOrLess -> Period.TWENTY_FOUR_HOURS_OR_LESS
+                            R.id.rb1weekOrLess -> Period.ONE_WEEK_OR_LESS
+                            R.id.rb1monthOrLess -> Period.ONE_MONTH_OR_LESS
+                            R.id.rb1yearOrLess -> Period.ONE_YEAR_OR_LESS
+                            else -> Period.NO_LIMIT
+                        }
                         val intent = Intent(
                             Intent.ACTION_VIEW,
                             Uri.parse(
                                 "https://www.google.com/search?q=$query" +
-                                        settingViewModel.generateSearchUrlOption(adapter.currentList) +
-                                        "&tbs=qdr:y"
+                                        settingViewModel.generateSearchUrlOption(adapter.currentList, period)
                             )
                         )
                         startActivity(intent)
@@ -120,5 +129,4 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
             startActivity(Intent(this, AddSettingActivity::class.java))
         }
     }
-
 }

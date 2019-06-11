@@ -3,6 +3,7 @@ package com.phicdy.advancedkeywordsearch
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.phicdy.advancedkeywordsearch.domain.entity.Period
 import com.phicdy.advancedkeywordsearch.domain.usecase.SearchUrlOptionUseCase
 import com.phicdy.advancedkeywordsearch.model.SearchSetting
 import com.phicdy.advancedkeywordsearch.model.SearchSettingAndKeywords
@@ -26,6 +27,9 @@ class SettingViewModel @Inject constructor(
         settingRepository.update(setting)
     }
 
-    fun generateSearchUrlOption(settings: List<SearchSettingAndKeywords>) =
-        searchUrlOptionUseCase.generateSearchUrlOption(settings)
+    fun generateSearchUrlOption(
+        settings: List<SearchSettingAndKeywords>,
+        period: Period
+    ) =
+        searchUrlOptionUseCase.generateSearchUrlOption(settings, period)
 }
