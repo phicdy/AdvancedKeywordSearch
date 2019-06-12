@@ -26,7 +26,7 @@
                 android:layout_marginEnd="8dp"
                 android:inputType="text"
                 android:imeOptions="actionDone"
-                android:hint="タイトル"/>
+                android:hint="@string/hint_title"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -46,7 +46,7 @@
                 android:layout_marginEnd="8dp"
                 android:inputType="text"
                 android:imeOptions="actionDone"
-                android:hint="除外キーワード"/>
+                android:hint="@string/hint_add_excluded_keyword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -65,7 +65,7 @@
             android:id="@+id/storeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="保存"
+            android:text="@string/button_save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
