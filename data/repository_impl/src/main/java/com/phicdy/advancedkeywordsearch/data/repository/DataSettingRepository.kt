@@ -27,4 +27,8 @@ class DataSettingRepository @Inject constructor(
     override suspend fun update(setting: SearchSetting) = withContext(Dispatchers.IO) {
         database.update(setting)
     }
+
+    override suspend fun delete(setting: SearchSetting) = withContext(Dispatchers.IO) {
+        database.delete(setting)
+    }
 }

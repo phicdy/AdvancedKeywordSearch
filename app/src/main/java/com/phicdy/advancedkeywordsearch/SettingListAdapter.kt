@@ -2,6 +2,7 @@ package com.phicdy.advancedkeywordsearch
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -47,6 +48,20 @@ class SettingListAdapter(
                     )
                 }
             }
+        }
+
+        holder.binding.delete.setOnClickListener {
+            AlertDialog.Builder(holder.binding.root.context)
+                .setTitle(R.string.alert_delete_title)
+                .setMessage(R.string.alert_delete_message)
+                .setPositiveButton(
+                    R.string.alert_delete_positive
+                ) { _, _ -> coroutineScope.launch { settingViewModel.delete(setting) } }
+                .setNegativeButton(
+                    R.string.alert_delete_negative
+                ) { _, _ -> }
+                .create()
+                .show()
         }
 
         val flexboxLayoutManager = FlexboxLayoutManager(holder.binding.root.context).apply {

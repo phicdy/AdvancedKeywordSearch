@@ -27,6 +27,10 @@ class SettingViewModel @Inject constructor(
         settingRepository.update(setting)
     }
 
+    suspend fun delete(setting: SearchSetting) {
+        settingRepository.delete(setting)
+    }
+
     fun generateSearchUrlOption(
         settings: List<SearchSettingAndKeywords>,
         period: Period

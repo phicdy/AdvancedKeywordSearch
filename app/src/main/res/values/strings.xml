@@ -11,4 +11,9 @@
     <string name="one_week_or_less">1週間以内</string>
     <string name="one_month_or_less">1ヶ月以内</string>
     <string name="one_year_or_less">1年以内</string>
+
+    <string name="alert_delete_title">確認</string>
+    <string name="alert_delete_message">削除してもよろしいですか？</string>
+    <string name="alert_delete_positive">OK</string>
+    <string name="alert_delete_negative">キャンセル</string>
 </resources>

@@ -27,4 +27,8 @@ class AppDatabase @Inject constructor(
     override fun update(setting: SearchSetting) {
         database.searchSettingDao().updateSetting(setting)
     }
+
+    override fun delete(setting: SearchSetting) {
+        database.searchSettingDao().deleteSetting(setting)
+    }
 }
