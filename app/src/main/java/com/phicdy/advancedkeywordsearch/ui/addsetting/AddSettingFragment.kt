@@ -67,6 +67,7 @@ class AddSettingFragment : DaggerFragment(), CoroutineScope {
                     title = binding.inputTitle.text.toString(),
                     keywords = adapter.items.map { ExcludedKeyword(keyword = it) }
                 )
+                activity?.finish()
             }
         }
 
