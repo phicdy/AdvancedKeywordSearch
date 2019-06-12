@@ -20,50 +20,65 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <RadioGroup
-                android:id="@+id/rgPeriod"
-                android:layout_width="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checkedButton="@id/rbNoLimit"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="12dp"
-                android:orientation="vertical">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_marginStart="8dp"
-                    android:layout_width="wrap_content"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="4dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/default_stroke"
+                app:cardBackgroundColor="@color/card_background"
+                app:cardCornerRadius="4dp">
+
+                <RadioGroup
+                    android:id="@+id/rgPeriod"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/period"/>
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rbNoLimit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no_period_limit"/>
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb1hourOrLess"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/one_hour_or_less"/>
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb24hoursOrLess"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/twenty_hour_hours_or_less"/>
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb1weekOrLess"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/one_week_or_less"/>
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb1monthOrLess"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/one_month_or_less"/>
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb1yearOrLess"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/one_year_or_less"/>
-            </RadioGroup>
+                    android:checkedButton="@id/rbNoLimit"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/period"/>
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rbNoLimit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_period_limit"/>
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rb1hourOrLess"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/one_hour_or_less"/>
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rb24hoursOrLess"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/twenty_hour_hours_or_less"/>
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rb1weekOrLess"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/one_week_or_less"/>
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rb1monthOrLess"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/one_month_or_less"/>
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/rb1yearOrLess"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/one_year_or_less"/>
+                </RadioGroup>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 
