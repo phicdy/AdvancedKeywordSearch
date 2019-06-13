@@ -24,8 +24,8 @@ class AppDatabase @Inject constructor(
         database.searchSettingDao().insertKeyword(*insertKeywords.toTypedArray())
     }
 
-    override fun update(setting: SearchSetting) {
-        database.searchSettingDao().updateSetting(setting)
+    override fun update(settings: List<SearchSetting>) {
+        database.searchSettingDao().updateSetting(*settings.toTypedArray())
     }
 
     override fun delete(setting: SearchSetting) {

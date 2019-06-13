@@ -9,6 +9,6 @@ interface SettingRepository {
 
     suspend fun fetch(): LiveData<List<SearchSettingAndKeywords>>
     suspend fun store(title: String, keywords: List<ExcludedKeyword>)
-    suspend fun update(setting: SearchSetting)
+    suspend fun update(settings: List<SearchSetting>)
     suspend fun delete(setting: SearchSetting)
 }

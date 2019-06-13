@@ -18,7 +18,7 @@ interface SearchSettingDao {
     fun insertSetting(setting: SearchSetting): Long
 
     @Update
-    fun updateSetting(setting: SearchSetting)
+    fun updateSetting(vararg setting: SearchSetting)
 
     @Insert
     fun insertKeyword(vararg keywords: ExcludedKeyword)

@@ -41,13 +41,7 @@ class SettingListAdapter(
             )
             setOnClickListener {
                 coroutineScope.launch {
-                    settingViewModel.update(
-                        setting.copy(
-                            setting.id,
-                            setting.title,
-                            !setting.defaultEnabled
-                        )
-                    )
+                    settingViewModel.changeDefault(setting.id, currentList)
                 }
             }
         }
