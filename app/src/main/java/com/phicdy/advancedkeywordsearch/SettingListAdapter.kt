@@ -33,9 +33,11 @@ class SettingListAdapter(
         holder.binding.title.text = setting.title
 
         holder.binding.card.apply {
-            strokeColor = ContextCompat.getColor(
-                holder.binding.root.context,
-                if (setting.defaultEnabled) R.color.colorAccent else R.color.default_stroke
+            setCardBackgroundColor(
+                ContextCompat.getColor(
+                    holder.binding.root.context,
+                    if (setting.defaultEnabled) R.color.colorAccent else R.color.card_background
+                )
             )
             setOnClickListener {
                 coroutineScope.launch {
