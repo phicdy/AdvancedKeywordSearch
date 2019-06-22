@@ -2,8 +2,10 @@ package com.phicdy.advancedkeywordsearch
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -36,7 +38,7 @@ class SettingListAdapter(
             setCardBackgroundColor(
                 ContextCompat.getColor(
                     holder.binding.root.context,
-                    if (setting.defaultEnabled) R.color.colorAccent else R.color.card_background
+                    if (setting.defaultEnabled) R.color.card_background_enabled else R.color.card_background
                 )
             )
             setOnClickListener {
@@ -46,6 +48,9 @@ class SettingListAdapter(
             }
         }
 
+        holder.binding.delete.setImageResource(
+            if (setting.defaultEnabled) R.drawable.ic_delete_white else R.drawable.ic_delete
+        )
         holder.binding.delete.setOnClickListener {
             AlertDialog.Builder(holder.binding.root.context)
                 .setTitle(R.string.alert_delete_title)
@@ -60,12 +65,15 @@ class SettingListAdapter(
                 .show()
         }
 
+        holder.binding.title.setCardTextColor(setting.defaultEnabled)
+        holder.binding.excludedKeywordsLabel.setCardTextColor(setting.defaultEnabled)
+
         val flexboxLayoutManager = FlexboxLayoutManager(holder.binding.root.context).apply {
             flexWrap = FlexWrap.WRAP
             flexDirection = FlexDirection.ROW
             alignItems = AlignItems.STRETCH
         }
-        val adapter = KeywordListAdapter()
+        val adapter = KeywordListAdapter(setting.defaultEnabled)
         holder.binding.recyclerView.apply {
             this.adapter = adapter
             layoutManager = flexboxLayoutManager
@@ -76,6 +84,15 @@ class SettingListAdapter(
     class SearchSettingViewHolder(
         val binding: ItemSearchSettingBinding
     ) : RecyclerView.ViewHolder(binding.root)
+}
+
+fun TextView.setCardTextColor(defaultEnabled: Boolean) {
+    setTextColor(
+        ContextCompat.getColor(
+            context,
+            if (defaultEnabled) R.color.textPrimary_white else R.color.textPrimary
+        )
+    )
 }
 
 private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SearchSettingAndKeywords>() {
@@ -89,7 +106,8 @@ private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SearchSettingAndKeywo
     }
 }
 
-class KeywordListAdapter : ListAdapter<ExcludedKeyword, KeywordListAdapter.KeywordViewHolder>(KEYWORD_DIFF_CALLBACK) {
+class KeywordListAdapter(private val defaultEnabled: Boolean) :
+    ListAdapter<ExcludedKeyword, KeywordListAdapter.KeywordViewHolder>(KEYWORD_DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KeywordViewHolder {
         val binding = ItemExcludedKeywordBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -97,7 +115,14 @@ class KeywordListAdapter : ListAdapter<ExcludedKeyword, KeywordListAdapter.Keywo
     }
 
     override fun onBindViewHolder(holder: KeywordViewHolder, position: Int) {
-        holder.binding.keyword.text = getItem(position).keyword
+        holder.binding.keyword.apply {
+            text = getItem(position).keyword
+            background = ResourcesCompat.getDrawable(
+                resources,
+                if (defaultEnabled) R.drawable.circle_radius_black else R.drawable.circle_radius,
+                null
+            )
+        }
     }
 
     class KeywordViewHolder(
