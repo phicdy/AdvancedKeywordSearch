@@ -7,6 +7,10 @@ AdvancedKeywordSearch is Android application to search Google with options
 * Exclude keywords
 * Period setting
 
+## Multi-Module
+
+<img src="https://raw.githubusercontent.com/phicdy/AdvancedKeywordSearch/master/modules.png" alt="modules" title="modules">
+
 ## Credits
 
 * [Kotlin coroutines](https://github.com/Kotlin/kotlinx.coroutines)
