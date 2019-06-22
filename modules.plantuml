@@ -1,0 +1,29 @@
+@startuml
+
+package app
+package db
+package db_room
+package repository
+package repository_impl
+package model
+package domain
+package preferences
+
+app -down-> db
+app -down-> db_room
+app -down-> repository
+app -down-> repository_impl
+app -down-> model
+app -down-> domain
+app -down-> preferences
+db -down-> model
+db_room -down-> model
+db_room -up-> db
+domain -down-> model
+repository -down-> model
+repository_impl -down-> db
+repository_impl -up-> repository
+repository_impl -down-> model
+repository_impl -down-> preferences
+
+@enduml
