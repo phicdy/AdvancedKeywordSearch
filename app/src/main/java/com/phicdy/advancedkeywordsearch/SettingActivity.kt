@@ -12,8 +12,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.google.android.flexbox.AlignItems
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.phicdy.advancedkeywordsearch.databinding.ActivitySettingBinding
 import com.phicdy.advancedkeywordsearch.domain.entity.Period
 import com.phicdy.advancedkeywordsearch.ui.addsetting.AddSettingActivity
@@ -44,7 +46,7 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
     }
 
     private val adapter by lazy {
-        SettingListAdapter(settingViewModel, this)
+        KeywordListAdapter(true)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,15 +62,20 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
         super.onStart()
         launch {
             settingViewModel.searchSetting.await().observe(this@SettingActivity, Observer {
-                adapter.submitList(it)
+                adapter.submitList(it[0].keywords)
             })
         }
     }
 
     private fun initRecyclerView() {
+        val flexboxLayoutManager = FlexboxLayoutManager(binding.root.context).apply {
+            flexWrap = FlexWrap.WRAP
+            flexDirection = FlexDirection.ROW
+            alignItems = AlignItems.STRETCH
+        }
         binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(this@SettingActivity, RecyclerView.HORIZONTAL, false)
             adapter = this@SettingActivity.adapter
+            layoutManager = flexboxLayoutManager
         }
     }
 
@@ -93,7 +100,10 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
                             Intent.ACTION_VIEW,
                             Uri.parse(
                                 "https://www.google.com/search?q=$query" +
-                                        settingViewModel.generateSearchUrlOption(adapter.currentList, period)
+                                        settingViewModel.generateSearchUrlOption(
+                                            adapter.currentList,
+                                            period
+                                        )
                             )
                         )
                         startActivity(intent)
