@@ -62,7 +62,7 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
         super.onStart()
         launch {
             settingViewModel.searchSetting.await().observe(this@SettingActivity, Observer {
-                adapter.submitList(it[0].keywords)
+                adapter.submitList(it.keywords)
             })
         }
     }

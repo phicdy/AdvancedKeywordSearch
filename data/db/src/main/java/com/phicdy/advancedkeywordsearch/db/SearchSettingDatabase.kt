@@ -6,7 +6,7 @@ import com.phicdy.advancedkeywordsearch.model.SearchSetting
 import com.phicdy.advancedkeywordsearch.model.SearchSettingAndKeywords
 
 interface SearchSettingDatabase {
-    fun settings(): LiveData<List<SearchSettingAndKeywords>>
+    fun settings(): LiveData<SearchSettingAndKeywords>
     fun store(title: String, keywords: List<ExcludedKeyword>)
     fun update(settings: List<SearchSetting>)
     fun delete(setting: SearchSetting)

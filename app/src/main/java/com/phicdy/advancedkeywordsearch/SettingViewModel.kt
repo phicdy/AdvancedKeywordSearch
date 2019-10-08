@@ -21,7 +21,7 @@ class SettingViewModel @Inject constructor(
     private val searchUrlOptionUseCase: SearchUrlOptionUseCase
 ) : ViewModel() {
 
-    val searchSetting: Deferred<LiveData<List<SearchSettingAndKeywords>>> by lazy {
+    val searchSetting: Deferred<LiveData<SearchSettingAndKeywords>> by lazy {
         viewModelScope.async(start = CoroutineStart.LAZY) { settingRepository.fetch() }
     }
 

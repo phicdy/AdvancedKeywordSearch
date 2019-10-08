@@ -14,12 +14,13 @@ class AppDatabase @Inject constructor(
     val database: AppRoomDatabase
 ) : SearchSettingDatabase {
 
-    override fun settings(): LiveData<List<SearchSettingAndKeywords>> {
+    override fun settings(): LiveData<SearchSettingAndKeywords> {
         return database.searchSettingDao().loadSettingAndKeyword()
     }
 
     override fun store(title: String, keywords: List<ExcludedKeyword>) {
-        val id = database.searchSettingDao().insertSetting(SearchSetting(title = title, defaultEnabled = false))
+        val id = database.searchSettingDao()
+            .insertSetting(SearchSetting(title = title, defaultEnabled = false))
         val insertKeywords = keywords.map { ExcludedKeyword(it.id, id, it.keyword) }
         database.searchSettingDao().insertKeyword(*insertKeywords.toTypedArray())
     }

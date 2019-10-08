@@ -27,6 +27,6 @@ interface SearchSettingDao {
     fun deleteSetting(vararg settings: SearchSetting)
 
     @Transaction
-    @Query("SELECT * FROM search_setting")
-    fun loadSettingAndKeyword(): LiveData<List<SearchSettingAndKeywords>>
+    @Query("SELECT * FROM search_setting limit 1")
+    fun loadSettingAndKeyword(): LiveData<SearchSettingAndKeywords>
 }
