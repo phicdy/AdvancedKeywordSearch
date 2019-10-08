@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +25,8 @@ class SettingListAdapter(
 ) : ListAdapter<SearchSettingAndKeywords, SettingListAdapter.SearchSettingViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchSettingViewHolder {
-        val listItemBinding = ItemSearchSettingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val listItemBinding =
+            ItemSearchSettingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SearchSettingViewHolder(listItemBinding)
     }
 
@@ -73,7 +73,7 @@ class SettingListAdapter(
             flexDirection = FlexDirection.ROW
             alignItems = AlignItems.STRETCH
         }
-        val adapter = KeywordListAdapter(setting.defaultEnabled)
+        val adapter = KeywordListAdapter()
         holder.binding.recyclerView.apply {
             this.adapter = adapter
             layoutManager = flexboxLayoutManager
@@ -97,32 +97,32 @@ fun TextView.setCardTextColor(defaultEnabled: Boolean) {
 
 private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SearchSettingAndKeywords>() {
 
-    override fun areItemsTheSame(oldItem: SearchSettingAndKeywords, newItem: SearchSettingAndKeywords): Boolean {
+    override fun areItemsTheSame(
+        oldItem: SearchSettingAndKeywords,
+        newItem: SearchSettingAndKeywords
+    ): Boolean {
         return oldItem.setting.id == newItem.setting.id
     }
 
-    override fun areContentsTheSame(oldItem: SearchSettingAndKeywords, newItem: SearchSettingAndKeywords): Boolean {
+    override fun areContentsTheSame(
+        oldItem: SearchSettingAndKeywords,
+        newItem: SearchSettingAndKeywords
+    ): Boolean {
         return oldItem == newItem
     }
 }
 
-class KeywordListAdapter(private val defaultEnabled: Boolean) :
+class KeywordListAdapter :
     ListAdapter<ExcludedKeyword, KeywordListAdapter.KeywordViewHolder>(KEYWORD_DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KeywordViewHolder {
-        val binding = ItemExcludedKeywordBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemExcludedKeywordBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return KeywordViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: KeywordViewHolder, position: Int) {
-        holder.binding.keyword.apply {
-            text = getItem(position).keyword
-            background = ResourcesCompat.getDrawable(
-                resources,
-                if (defaultEnabled) R.drawable.circle_radius_black else R.drawable.circle_radius,
-                null
-            )
-        }
+        holder.binding.keyword.text = getItem(position).keyword
     }
 
     class KeywordViewHolder(

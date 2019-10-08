@@ -46,7 +46,7 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
     }
 
     private val adapter by lazy {
-        KeywordListAdapter(true)
+        KeywordListAdapter()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
