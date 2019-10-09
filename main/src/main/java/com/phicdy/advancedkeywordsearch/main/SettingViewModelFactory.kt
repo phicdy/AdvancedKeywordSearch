@@ -1,4 +1,4 @@
-package com.phicdy.advancedkeywordsearch
+package com.phicdy.advancedkeywordsearch.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

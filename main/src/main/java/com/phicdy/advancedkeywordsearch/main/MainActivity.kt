@@ -1,4 +1,4 @@
-package com.phicdy.advancedkeywordsearch
+package com.phicdy.advancedkeywordsearch.main
 
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -16,9 +16,9 @@ import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.phicdy.advancedkeywordsearch.databinding.ActivityMainBinding
 import com.phicdy.advancedkeywordsearch.domain.entity.Period
-import com.phicdy.advancedkeywordsearch.ui.addsetting.AddSettingActivity
+import com.phicdy.advancedkeywordsearch.main.addsetting.AddSettingActivity
+import com.phicdy.advancedkeywordsearch.main.databinding.ActivityMainBinding
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

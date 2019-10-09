@@ -1,4 +1,4 @@
-package com.phicdy.advancedkeywordsearch.ui.addsetting
+package com.phicdy.advancedkeywordsearch.main.addsetting
 
 import androidx.lifecycle.ViewModel
 import com.phicdy.advancedkeywordsearch.model.ExcludedKeyword

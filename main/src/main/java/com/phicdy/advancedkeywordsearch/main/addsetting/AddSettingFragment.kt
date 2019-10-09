@@ -1,4 +1,4 @@
-package com.phicdy.advancedkeywordsearch.ui.addsetting
+package com.phicdy.advancedkeywordsearch.main.addsetting
 
 import android.os.Bundle
 import android.view.KeyEvent
@@ -10,8 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.phicdy.advancedkeywordsearch.R
-import com.phicdy.advancedkeywordsearch.databinding.AddSettingFragmentBinding
+import com.phicdy.advancedkeywordsearch.main.R
+import com.phicdy.advancedkeywordsearch.main.databinding.AddSettingFragmentBinding
 import com.phicdy.advancedkeywordsearch.model.ExcludedKeyword
 import dagger.android.support.DaggerFragment
 import kotlinx.coroutines.CoroutineScope
@@ -40,7 +40,10 @@ class AddSettingFragment : DaggerFragment(), CoroutineScope {
     private val adapter = ExcludeKeywordListAdapter()
 
     private val binding: AddSettingFragmentBinding by lazy {
-        DataBindingUtil.setContentView<AddSettingFragmentBinding>(activity!!, R.layout.add_setting_fragment)
+        DataBindingUtil.setContentView<AddSettingFragmentBinding>(
+            activity!!,
+            R.layout.add_setting_fragment
+        )
     }
 
     override fun onCreateView(

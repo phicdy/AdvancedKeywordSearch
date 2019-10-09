@@ -2,11 +2,11 @@ package com.phicdy.advancedkeywordsearch.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.phicdy.advancedkeywordsearch.MainActivity
-import com.phicdy.advancedkeywordsearch.SettingViewModel
-import com.phicdy.advancedkeywordsearch.SettingViewModelFactory
-import com.phicdy.advancedkeywordsearch.ui.addsetting.AddSettingFragment
-import com.phicdy.advancedkeywordsearch.ui.addsetting.AddSettingViewModel
+import com.phicdy.advancedkeywordsearch.main.MainActivity
+import com.phicdy.advancedkeywordsearch.main.SettingViewModel
+import com.phicdy.advancedkeywordsearch.main.SettingViewModelFactory
+import com.phicdy.advancedkeywordsearch.main.addsetting.AddSettingFragment
+import com.phicdy.advancedkeywordsearch.main.addsetting.AddSettingViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

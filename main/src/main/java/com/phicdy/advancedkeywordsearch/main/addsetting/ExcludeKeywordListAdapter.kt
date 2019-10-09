@@ -1,16 +1,18 @@
-package com.phicdy.advancedkeywordsearch.ui.addsetting
+package com.phicdy.advancedkeywordsearch.main.addsetting
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.phicdy.advancedkeywordsearch.databinding.ItemAddedWordBinding
+import com.phicdy.advancedkeywordsearch.main.databinding.ItemAddedWordBinding
 
-class ExcludeKeywordListAdapter : RecyclerView.Adapter<ExcludeKeywordListAdapter.ExcludeKeywordViewHolder>() {
+class ExcludeKeywordListAdapter :
+    RecyclerView.Adapter<ExcludeKeywordListAdapter.ExcludeKeywordViewHolder>() {
 
     val items = mutableListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExcludeKeywordViewHolder {
-        val listItemBinding = ItemAddedWordBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val listItemBinding =
+            ItemAddedWordBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ExcludeKeywordViewHolder(listItemBinding)
     }
 

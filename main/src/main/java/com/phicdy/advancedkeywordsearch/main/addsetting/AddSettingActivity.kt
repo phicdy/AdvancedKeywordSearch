@@ -1,8 +1,8 @@
-package com.phicdy.advancedkeywordsearch.ui.addsetting
+package com.phicdy.advancedkeywordsearch.main.addsetting
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.phicdy.advancedkeywordsearch.R
+import com.phicdy.advancedkeywordsearch.main.R
 
 class AddSettingActivity : AppCompatActivity() {
 

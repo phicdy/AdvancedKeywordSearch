@@ -1,15 +1,17 @@
-package com.phicdy.advancedkeywordsearch
+package com.phicdy.advancedkeywordsearch.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.phicdy.advancedkeywordsearch.databinding.ItemExcludedKeywordBinding
+import com.phicdy.advancedkeywordsearch.main.databinding.ItemExcludedKeywordBinding
 import com.phicdy.advancedkeywordsearch.model.ExcludedKeyword
 
 class KeywordListAdapter :
-    ListAdapter<ExcludedKeyword, KeywordListAdapter.KeywordViewHolder>(KEYWORD_DIFF_CALLBACK) {
+    ListAdapter<ExcludedKeyword, KeywordListAdapter.KeywordViewHolder>(
+        KEYWORD_DIFF_CALLBACK
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KeywordViewHolder {
         val binding =
