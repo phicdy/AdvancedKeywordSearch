@@ -16,7 +16,7 @@ import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.phicdy.advancedkeywordsearch.databinding.ActivitySettingBinding
+import com.phicdy.advancedkeywordsearch.databinding.ActivityMainBinding
 import com.phicdy.advancedkeywordsearch.domain.entity.Period
 import com.phicdy.advancedkeywordsearch.ui.addsetting.AddSettingActivity
 import dagger.android.support.DaggerAppCompatActivity
@@ -28,7 +28,7 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 
-class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
+class MainActivity : DaggerAppCompatActivity(), CoroutineScope {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -37,8 +37,8 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
-    private val binding: ActivitySettingBinding by lazy {
-        DataBindingUtil.setContentView<ActivitySettingBinding>(this, R.layout.activity_setting)
+    private val binding: ActivityMainBinding by lazy {
+        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
     }
 
     private val settingViewModel by lazy {
@@ -61,7 +61,7 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
     override fun onStart() {
         super.onStart()
         launch {
-            settingViewModel.keywords.await().observe(this@SettingActivity, Observer {
+            settingViewModel.keywords.await().observe(this@MainActivity, Observer {
                 adapter.submitList(it)
             })
         }
@@ -74,7 +74,7 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
             alignItems = AlignItems.STRETCH
         }
         binding.recyclerView.apply {
-            adapter = this@SettingActivity.adapter
+            adapter = this@MainActivity.adapter
             layoutManager = flexboxLayoutManager
         }
     }
@@ -109,7 +109,7 @@ class SettingActivity : DaggerAppCompatActivity(), CoroutineScope {
                         startActivity(intent)
                     } catch (e: ActivityNotFoundException) {
                         Toast.makeText(
-                            this@SettingActivity,
+                            this@MainActivity,
                             getString(R.string.error_activity_not_found),
                             Toast.LENGTH_SHORT
                         ).show()

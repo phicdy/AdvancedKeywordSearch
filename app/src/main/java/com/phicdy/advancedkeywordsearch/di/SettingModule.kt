@@ -2,7 +2,7 @@ package com.phicdy.advancedkeywordsearch.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.phicdy.advancedkeywordsearch.SettingActivity
+import com.phicdy.advancedkeywordsearch.MainActivity
 import com.phicdy.advancedkeywordsearch.SettingViewModel
 import com.phicdy.advancedkeywordsearch.SettingViewModelFactory
 import com.phicdy.advancedkeywordsearch.ui.addsetting.AddSettingFragment
@@ -16,7 +16,7 @@ import dagger.multibindings.IntoMap
 abstract class SettingModule {
 
     @ContributesAndroidInjector
-    abstract fun contributeSettingActivity(): SettingActivity
+    abstract fun contributeSettingActivity(): MainActivity
 
     @ContributesAndroidInjector
     abstract fun contributeAddSettingFragment(): AddSettingFragment
