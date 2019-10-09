@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.phicdy.advancedkeywordsearch.domain.entity.Period
 import com.phicdy.advancedkeywordsearch.domain.usecase.SearchUrlOptionUseCase
 import com.phicdy.advancedkeywordsearch.model.ExcludedKeyword
-import com.phicdy.advancedkeywordsearch.model.SearchSettingAndKeywords
 import com.phicdy.advancedkeywordsearch.repository.SettingRepository
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Deferred
@@ -18,8 +17,12 @@ class SettingViewModel @Inject constructor(
     private val searchUrlOptionUseCase: SearchUrlOptionUseCase
 ) : ViewModel() {
 
-    val searchSetting: Deferred<LiveData<SearchSettingAndKeywords>> by lazy {
+    val keywords: Deferred<LiveData<List<ExcludedKeyword>>> by lazy {
         viewModelScope.async(start = CoroutineStart.LAZY) { settingRepository.fetch() }
+    }
+
+    fun fetchSetting() {
+
     }
 
     fun generateSearchUrlOption(
