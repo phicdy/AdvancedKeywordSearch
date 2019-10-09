@@ -15,7 +15,7 @@ class DataSettingRepository @Inject constructor(
 ) : SettingRepository {
 
     override suspend fun fetch(): LiveData<List<ExcludedKeyword>> = withContext(Dispatchers.IO) {
-        return@withContext database.settings()
+        return@withContext database.excludedKeywords()
     }
 
     override suspend fun store(title: String, keywords: List<ExcludedKeyword>) =

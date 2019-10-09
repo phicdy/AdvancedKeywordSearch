@@ -8,12 +8,12 @@ import androidx.room.Transaction
 import com.phicdy.advancedkeywordsearch.model.ExcludedKeyword
 
 @Dao
-interface SearchSettingDao {
+interface ExcludeKeywordDao {
 
     @Insert
     fun insertKeyword(vararg keywords: ExcludedKeyword)
 
     @Transaction
     @Query("SELECT * FROM excluded_keyword")
-    fun loadSettingAndKeyword(): LiveData<List<ExcludedKeyword>>
+    fun loadKeywords(): LiveData<List<ExcludedKeyword>>
 }

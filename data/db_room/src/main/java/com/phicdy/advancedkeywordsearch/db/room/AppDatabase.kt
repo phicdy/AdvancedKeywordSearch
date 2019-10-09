@@ -12,12 +12,12 @@ class AppDatabase @Inject constructor(
     val database: AppRoomDatabase
 ) : SearchSettingDatabase {
 
-    override fun settings(): LiveData<List<ExcludedKeyword>> {
-        return database.searchSettingDao().loadSettingAndKeyword()
+    override fun excludedKeywords(): LiveData<List<ExcludedKeyword>> {
+        return database.excludedKeywordDao().loadKeywords()
     }
 
     override fun store(title: String, keywords: List<ExcludedKeyword>) {
         val insertKeywords = keywords.map { ExcludedKeyword(it.id, it.keyword) }
-        database.searchSettingDao().insertKeyword(*insertKeywords.toTypedArray())
+        database.excludedKeywordDao().insertKeyword(*insertKeywords.toTypedArray())
     }
 }
