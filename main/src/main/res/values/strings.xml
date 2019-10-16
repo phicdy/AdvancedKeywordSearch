@@ -4,6 +4,7 @@
     <string name="search_hint">検索語句</string>
     <string name="error_activity_not_found">ブラウザが見つかりません</string>
     <string name="excluded_keyword">除外キーワード</string>
+    <string name="no_excluded_keyword">なし</string>
     <string name="period">期間</string>
     <string name="no_period_limit">期間指定なし</string>
     <string name="one_hour_or_less">1時間以内</string>

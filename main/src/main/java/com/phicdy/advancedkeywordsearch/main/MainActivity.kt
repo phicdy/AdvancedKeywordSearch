@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -62,7 +63,14 @@ class MainActivity : DaggerAppCompatActivity(), CoroutineScope {
         super.onStart()
         launch {
             settingViewModel.keywords.await().observe(this@MainActivity, Observer {
-                adapter.submitList(it)
+                if (it.isEmpty()) {
+                    binding.emptyKeyword.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.GONE
+                } else {
+                    binding.emptyKeyword.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
+                    adapter.submitList(it)
+                }
             })
         }
     }
